@@ -2,7 +2,7 @@ const express=require('express');
 const user=require('./../modles/user');
 const  {authenticate,genratetoken} = require('../jwt');
 router=express.Router();
-router.get('/profile',authenticate,async(req,res)=>{
+router.get('users/profile',authenticate,async(req,res)=>{
      const data=req.user;
     try {
         const response=await user.findById(data.id);
@@ -11,7 +11,7 @@ router.get('/profile',authenticate,async(req,res)=>{
         res.status(500).json(error);
     } 
 })
-router.put('/profile/password',authenticate,async(req,res)=>{
+router.put('users/profile/password',authenticate,async(req,res)=>{
     const userId=req.user.id;
     const  currentPassword = req.body.currentPassword;
     const newPassword=req.body.newPassword;
