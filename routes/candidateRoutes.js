@@ -38,7 +38,7 @@ router.get('/candidates',authenticate,async(req,res)=>{  //working
      }
     
 })
-router.post('/vote/:candidateid',authenticate,async(req,res)=>{  //working for admin //working voter
+router.post('candidates/vote/:candidateid',authenticate,async(req,res)=>{  //working for admin //working voter
   // no admin can vote
   if(await checkadminrole(req.user.id)){
    return res.status(404).json({message:'admin is not allowed to vote'})
@@ -65,7 +65,7 @@ try {
 }
 })
 
-router.get('/vote/count',authenticate,async(req,res)=>{    //working 
+router.get('candidates/vote/count',authenticate,async(req,res)=>{    //working 
    const candidate1=await candidate.find().sort({votecount:'desc'})
    const filteredUserdata =candidate1.map((user)=>{
       return {votecount: user.votecount,
